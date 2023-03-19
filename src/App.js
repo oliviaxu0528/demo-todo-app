@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [todo, setTodo] = useState('');
+
+  function post () {
+    axios.post('/todo', {
+      test: 'test'
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="App">
+        Hello App!
+      </div>
+      <input onChange={(event)=>{
+        setTodo(event.target.value)
+        console.log(event.target.value);
+        }}>
+      </input>
+      <button onClick={()=>{
+        post();
+        console.log('POST sent to server')
+      }}>
+        Submit New Todo
+      </button>
     </div>
   );
 }
