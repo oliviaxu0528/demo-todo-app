@@ -7,7 +7,7 @@ function App() {
 
   function post () {
     axios.post('/todo', {
-      test: 'test'
+      todo: todo,
     })
     .then(function (response) {
       console.log(response);
